@@ -1,0 +1,20 @@
+services:
+  rest-server:
+    build: ./api-rest
+    container_name: rest-server
+    networks:
+      - my-network
+
+  web-app:
+    build: ./web-app
+    container_name: web-app
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+    depends_on:
+      - rest-server
+
+networks:
+  my-network:
+    driver: bridge

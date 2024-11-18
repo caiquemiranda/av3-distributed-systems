@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Aplicação na Web</title>
+</head>
+
+<body>
+    <h1>Bem-vindo a minha página Web</h1>
+    <div id="message"></div>
+
+    <script>
+        fetch('http://rest-server:3000/api/message')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('message').innerText = data.message;
+            })
+            .catch(error => console.error('Erro:', error));
+    </script>
+
+
+</body>
+
+</html>
