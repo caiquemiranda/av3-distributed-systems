@@ -1,9 +1,11 @@
 services:
-  rest-server:
+  api-rest:
     build: ./api-rest
-    container_name: rest-server
+    container_name: api-rest
     networks:
       - my-network
+    ports:
+      - "3000:3000"
 
   web-app:
     build: ./web-app
@@ -13,7 +15,7 @@ services:
     networks:
       - my-network
     depends_on:
-      - rest-server
+      - api-rest
 
 networks:
   my-network:
