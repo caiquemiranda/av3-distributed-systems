@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens dos Servidores</title>
+    <script>
+        function buscarMensagemFastAPI() {
+            fetch('http://localhost/api/mensagem')  // A URL será roteada pelo Nginx
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('msg-fastapi').innerText = "Mensagem do FastAPI: " + data;
+                })
+                .catch(error => console.error('Erro ao buscar mensagem do FastAPI:', error));
+        }
+
+        function buscarMensagemGo() {
+            fetch('http://localhost/mensagem')  // A URL será roteada pelo Nginx
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('msg-go').innerText = "Mensagem do Go: " + data;
+                })
+                .catch(error => console.error('Erro ao buscar mensagem do Go:', error));
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Receber Mensagens</h1>
+    <div>
+        <button onclick="buscarMensagemFastAPI()">Buscar Mensagem do FastAPI</button>
+        <p id="msg-fastapi">Mensagem do FastAPI será exibida aqui.</p>
+    </div>
+    <div>
+        <button onclick="buscarMensagemGo()">Buscar Mensagem do Go</button>
+        <p id="msg-go">Mensagem do Go será exibida aqui.</p>
+    </div>
+</body>
+
+</html>

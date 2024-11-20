@@ -2,20 +2,44 @@ services:
   api-rest:
     build: ./api-rest
     container_name: api-rest
+    ports:
+      - "3000:3000"  # FastAPI exposto na porta 3000
     networks:
       - my-network
-    ports:
-      - "3000:3000"
 
   web-app:
-    build: ./web-app
+    build:
+      context: .
+      dockerfile: web-app/Dockerfile
     container_name: web-app
     ports:
-      - "8080:8080"
+      - "8080:80"  # Frontend exposto na porta 8080
     networks:
       - my-network
     depends_on:
       - api-rest
+
+  go-server:
+    build: ./go-server  # Pasta onde está o Dockerfile para o servidor Go
+    container_name: go-server
+    ports:
+      - "8081:8080"  # Servidor Go exposto na porta 8081
+    networks:
+      - my-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"  # Porta 80 para o frontend e proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # O arquivo de configuração do Nginx
+    depends_on:
+      - web-app
+      - api-rest
+      - go-server
+    networks:
+      - my-network
 
 networks:
   my-network:

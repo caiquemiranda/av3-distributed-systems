@@ -1,13 +1,4 @@
-FROM node:18
+FROM nginx:alpine
 
-WORKDIR /app
-
-COPY package.json package-lock.json ./
-
-RUN npm install
-
-COPY . .
-
-EXPOSE 8080
-
-CMD [ "node", "index.js" ]
+# Copia o arquivo index.html para o diretório onde o nginx serve os arquivos
+COPY ./web-app/index.html /usr/share/nginx/html/index.html
