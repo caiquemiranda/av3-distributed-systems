@@ -38,7 +38,7 @@ Este repositório contém o código-fonte de uma aplicação composta por dois s
 Clone este repositório em sua máquina local:
 
 ```bash
-git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/caiquemiranda/av3-distributed-systems)
+git clone https://github.com/caiquemiranda/av3-distributed-systems
 cd seu-repositorio
 ```
 
